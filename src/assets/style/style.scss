@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  //htmlタグのスタイルを上書きしたい場合はここに記述する
+  html {
+    font-family: YakuHanJP, "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Noto Sans JP", Meiryo, sans-serif;
+    letter-spacing: 0.1em;
+  }
+}
