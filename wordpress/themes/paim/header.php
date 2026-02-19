@@ -20,4 +20,13 @@
   <script src="<?php echo $root;?>/assets/js/script.<?php echo $js_ext?>" type="module"></script>
   <?php wp_head(); ?>
 </head>
-<body>
+  <body>
+  <header>
+      <a href="#"><img src="/assets/images/logo.svg" alt="PAIM"></a>
+      <ul>
+          <li><a href="#works">WORKS</a></li>
+          <li><a href="#news">NEWS</a></li>
+          <li><a href="#aboutus">ABOUT US</a></li>
+          <li><a href="#contact">CONTACT</a></li>
+      </ul>
+  </header>

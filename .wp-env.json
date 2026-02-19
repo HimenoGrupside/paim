@@ -3,12 +3,7 @@
   "config": {
     "WP_DEBUG": true,
     "WP_UPLOAD_MAX_FILESIZE": "128M",
-		"WP_MEMORY_LIMIT": "256M"
+    "WP_MEMORY_LIMIT": "256M"
   },
-  "themes":["."],
-  "mappings": {
-    "wp-content/uploads": "./wordpress/uploads",
-    "wp-content/themes": "./wordpress/themes",
-    "wp-content/plugins": "./wordpress/plugins"
-  }
+  "themes": [ "./wordpress/themes/paim" ]
 }

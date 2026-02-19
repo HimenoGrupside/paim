@@ -7,5 +7,424 @@
   html {
     font-family: YakuHanJP, "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Noto Sans JP", Meiryo, sans-serif;
     letter-spacing: 0.1em;
+    scroll-behavior: smooth;
   }
 }
+
+
+a:hover{
+    opacity: 0.6;
+    transition: 0.3s;
+}
+
+p{
+    font-size: 15px;
+}
+
+h2 {
+  font-size: 30px;
+  font-weight: bold;
+  display: inline-block; 
+  padding: 0 20px; 
+  text-align: center;
+}
+
+h2 span {
+  font-size: 15px;
+  display: block;
+  text-align: center;
+  position: relative;
+  margin-left: -20px; 
+  margin-right: -20px;  
+  padding-top: 10px;
+  font-weight: normal;
+}
+
+h2 span::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%; 
+  height: 5px;
+  background-color: #00a5e5;
+  border-radius: 5px;
+}
+
+.l-container-width{
+    padding: 60px 0;
+    max-width: 1000px;
+    margin: 0 auto;
+    position:relative;
+}
+.l-container-100{
+    width: 100%;
+    background: #d4d4d4;
+    position:relative;
+}
+
+.btn-common{
+    border-radius: 50%;
+    border: 3px solid #00a5e5;
+    background-color: #fff;
+    width: 100px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    left: 0;
+    margin: 0 auto;
+    right: 0;
+    font-size: 14px;
+    z-index: 1;
+}
+
+@media screen and (max-width: 1024px) {
+    .l-container-width{
+        padding: 60px 0;
+        max-width: 90%;
+        margin: 0 auto;
+    }
+}
+
+
+/* ======================================
+   header
+====================================== */
+header{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    max-width: 1920px;
+    padding: 40px 0;
+}
+
+header a{
+    display: block;
+    max-width: 260px;  
+}
+header a img{
+    width: 100%;
+    display: block;
+}
+header ul{
+    display: flex;
+    gap: 35px;
+}
+
+/* ======================================
+   .fv
+====================================== */
+.fv{
+    background:url(/assets/images/fv_pc.png)center no-repeat , #fff;
+    max-width: 1920px;    
+    position: relative;
+}
+.fv h1 {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 235px 0;
+}
+.fv h1 img{
+    width: 100%;
+}
+
+.arrow{
+    position: absolute;
+    bottom: 8%;
+    left: 0;
+    right: 0;
+    display: block;
+    width: 45px;
+    margin: 0 auto;
+}
+
+/* ======================================
+    .top-content-area
+====================================== */
+.top-content-area{
+    padding: 50px 0;
+}
+.top-content-message{
+    font-size: 27px;
+    font-weight: bold;
+    text-align: center;
+    letter-spacing: 0.15rem;
+    line-height: 3.5rem;
+}
+
+.top-content-area .box{
+    margin-top: 65px;
+    background: linear-gradient(to bottom, #ffffff 0%, #ffffff 20%, #333333 20%, #333333 100%);
+}
+.top-content-area .box p{
+    text-align: center;
+    color: #fff;
+    font-size: 20px;
+    padding: 40px 0 60px;
+    line-height: 1.7;
+    letter-spacing: 0.08em;
+}
+
+.top-content-area .box ul{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+.top-content-area .box ul li{
+    border-radius: 50%;
+    padding: 10px;
+    box-sizing: border-box;
+    border: 3px solid #333333;
+    background-color: #fff;
+    font-size: 20px;
+    text-align: center;
+    color: #333333;
+    font-weight: bolder;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 200px;
+    height: 200px;
+    flex-direction: column; /* 縦並び */
+    justify-content: center; /* 中央に寄せる */
+    gap: 10px;
+}
+.top-content-area .box ul li span{
+    color: #c2c2c2;
+    display: block;
+    text-align: center;
+    font-size: 14px;
+    font-weight: normal;
+    width: 100%;
+}
+
+/* ======================================
+    works-area
+====================================== */
+.works-area ul{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 40px 20px;
+    margin: 40px auto;
+}
+.works-area ul li{
+    width: calc(100% / 2 - 20px)
+}
+
+/* 7つ周期の5番目 (5, 12, 19...) */
+.works-area ul li:nth-child(7n+5) { 
+    width: calc( 100% / 3 - 20px);
+
+}
+
+/* 7つ周期の6番目 (6, 13, 20...) */
+.works-area ul li:nth-child(7n+6) { 
+    width: calc( 100% / 3 - 20px);
+
+ }
+
+/* 7つ周期の7番目 (7, 14, 21...) */
+.works-area ul li:nth-child(7n) { 
+    width: calc( 100% / 3 - 20px);
+ }
+
+ /* 2番目 (2, 9, 16...) */
+.works-area ul li:nth-child(7n+2) {
+    padding: 20px 0 0;
+    border-top: 3px solid #00a5e5;
+}
+
+/* 3番目 (3, 10, 17...) */
+.works-area ul li:nth-child(7n+3) {
+    padding: 20px 0 0;
+    border-top: 3px solid #00a5e5;
+}
+
+/* 6番目 (6, 13, 20...) */
+.works-area ul li:nth-child(7n+6) {
+    padding: 20px 0 0;
+    border-top: 3px solid #00a5e5;
+}
+
+.works-area ul li img{
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+@media screen and (max-width: 768px) {
+  .works-area ul {
+    display: flex;
+    flex-direction: column; 
+  }
+
+/* 7つおきの周期の中で 2, 4, 5, 6番目を指定 */
+    .works-area ul li:nth-child(7n+2) a,
+    .works-area ul li:nth-child(7n+4) a,
+    .works-area ul li:nth-child(7n+5) a,
+    .works-area ul li:nth-child(7n+6) a{
+       display: flex;
+    }
+
+    .works-area ul li:nth-child(7n+2) a img,
+    .works-area ul li:nth-child(7n+4) a img,
+    .works-area ul li:nth-child(7n+5) a img,
+    .works-area ul li:nth-child(7n+6) a img{
+       width: 50%;
+    }
+}
+/* ======================================
+    .news-area
+====================================== */
+.news-area ul{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    margin: 50px auto;
+}
+.news-area ul li{
+    background-color: #fff;
+}
+.news-area ul li p.date{
+    padding: 20px 20px 0;
+    font-size: 14px;
+}
+.news-area ul li p.title{
+    padding: 0 20px 20px;
+    font-weight: bold;
+}
+
+@media screen and (max-width: 768px) {
+    .news-area ul{
+        flex-wrap: wrap;
+    }
+    .news-area ul li{
+        width: 100%;
+    }
+}
+
+/* ======================================
+    about-area
+====================================== */
+.about-area h2{
+    margin-bottom: 40px;
+}
+.about-area dl{
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+.about-area dl dt{
+    color: #fff;
+    padding: 5px 10px;
+    background-color: #00a5e5;
+    width: 20%;
+    text-align: center;
+    font-size: 14px;
+    font-weight: bold;
+    max-height: 30px;
+
+}
+
+.about-area dl dd{
+    border-bottom: 1px solid #626262;
+    width: 80%;
+    padding-left: 10px;
+    font-size: 14px;
+    line-height: 1.5;
+    letter-spacing: 0.05em;
+}
+.about-area .only-dd dd{
+    width: 100%;
+    padding: 5px 20px 10px;
+}
+
+@media screen and (max-width: 768px) {
+    .about-area dl dt{
+        max-height: max-content;
+    }
+}
+
+
+/* ======================================
+   .contact-area
+====================================== */
+.contact-area{
+    margin:0 0 160px ;
+}
+.contact-area p{
+    margin: 40px auto;
+}
+
+.contact-area a{
+    bottom: -50px;
+}
+
+/* ======================================
+   map-area
+====================================== */
+.map-area iframe{
+    width: 100%;
+    filter: grayscale(100%);
+}
+
+
+
+/* ======================================
+    footer
+====================================== */
+footer {
+    padding: 60px 60px 0;
+    background-color:#333333 ;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+footer ul li{
+    color: #fff;
+    font-size: 48px;
+    width: 300px;
+    position: relative;
+    z-index: 1; 
+}
+
+footer ul li:after{
+    content: "";
+    height: 8px;
+    background: linear-gradient(#00a5e5 60%, #00a5e5 60%);
+    width: 100%;
+    position:absolute;
+    bottom: 10px;
+    left: 0;
+    z-index: -1;
+}
+
+footer div{
+    width: 300px;
+}
+footer div img{
+    filter: brightness(0) invert(1);
+    max-width: 500px;
+}
+
+small{
+    display: flex;
+    width: 100%;
+    justify-content: right;
+    color: #fff;
+    font-size: 12px;
+    padding: 10px 0;
+    background-color:#333333 ;
+    padding: 10px 60px;
+}
+
+

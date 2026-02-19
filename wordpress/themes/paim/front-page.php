@@ -1,4 +1,5 @@
-<%- include('components/header.ejs') %>
+<?php get_header(); ?>
+
     <div class="fv">
         <h1><img src="/assets/images/logo.svg" alt="PAIM"></h1>
         <img class="arrow" src="/assets/images/arrow.svg" alt="arrow">
@@ -21,110 +22,76 @@
         <div class="works-area l-container-width" id="works">
             <h2>WORKS<span>実績紹介</span></h2>
             <ul>
-                <li><a href="#">
-                        <img src="/assets/images/dammy-g.png">
-                        <div>
-                            <p class="company-name">日鉄興和不動産</p>
-                            <p class="title-name">1000DREAMPROJECT</p>
-                        </div>
-                </a></li>
-                <li><a href="#">
-                        <img src="/assets/images/dammy-g.png">
-                        <div>
-                            <p class="date">東急不動産</p>
-                            <p class="title">BRANZE PROJECT 発表会</p>
-                        </div>
-                </a></li>
-                <li><a href="#">
-                        <img src="/assets/images/dammy-g.png">
-                        <div>
-                            <p class="date">三井不動産レジデンシャル／野村不動産</p>
-                            <p class="title">WEB-MOVIE INFORGRAPHICS</p>
-                        </div>
-                </a></li>
-                <li><a href="#">
-                        <img src="/assets/images/dammy-g.png">
-                        <div>
-                            <p class="company-name">日鉄興和不動産</p>
-                            <p class="title-name">1000DREAMPROJECT</p>
-                        </div>
-                </a></li>
-                <li><a href="#">
-                        <img src="/assets/images/dammy-g.png">
-                        <div>
-                            <p class="date">東急不動産</p>
-                            <p class="title">BRANZE PROJECT 発表会</p>
-                        </div>
-                </a></li>
-                <li><a href="#">
-                        <img src="/assets/images/dammy-g.png">
-                        <div>
-                            <p class="date">三井不動産レジデンシャル／野村不動産</p>
-                            <p class="title">WEB-MOVIE INFORGRAPHICS</p>
-                        </div>
-                </a></li>
-                <li><a href="#">
-                        <img src="/assets/images/dammy-g.png">
-                        <div>
-                            <p class="company-name">日鉄興和不動産</p>
-                            <p class="title-name">1000DREAMPROJECT</p>
-                        </div>
-                </a></li>
-                <li><a href="#">
-                        <img src="/assets/images/dammy-g.png">
-                        <div>
-                            <p class="date">東急不動産</p>
-                            <p class="title">BRANZE PROJECT 発表会</p>
-                        </div>
-                </a></li>
-                <li><a href="#">
-                        <img src="/assets/images/dammy-g.png">
-                        <div>
-                            <p class="date">三井不動産レジデンシャル／野村不動産</p>
-                            <p class="title">WEB-MOVIE INFORGRAPHICS</p>
-                        </div>
-                </a></li>
-                <li><a href="#">
-                        <img src="/assets/images/dammy-g.png">
-                        <div>
-                            <p class="company-name">日鉄興和不動産</p>
-                            <p class="title-name">1000DREAMPROJECT</p>
-                        </div>
-                </a></li>
-                <li><a href="#">
-                        <img src="/assets/images/dammy-g.png">
-                        <div>
-                            <p class="date">東急不動産</p>
-                            <p class="title">BRANZE PROJECT 発表会</p>
-                        </div>
-                </a></li>
-            </ul>
-             <a href="" class="btn-common">and more</a>
-        </div>
+                <?php
+                // 実績（works）を最新の12件取得する設定
+                $args = array(
+                    'post_type'      => 'works', // カスタム投稿タイプ名
+                    'posts_per_page' => 12,      // 表示したい件数
+                );
+                $works_query = new WP_Query($args);
+                ?>
 
+                <?php if ($works_query->have_posts()) : ?>
+                    <?php while ($works_query->have_posts()) : $works_query->the_post(); ?>
+                        <li>
+                            <a href="<?php the_permalink(); ?>">
+                                <?php if (has_post_thumbnail()) : ?>
+                                    <?php the_post_thumbnail('large'); ?>
+                                <?php else : ?>
+                                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/dammy-g.png" alt="ダミー画像">
+                                <?php endif; ?>
+                                
+                                <div>
+                                    <p class="company-name"><?php echo get_the_excerpt(); ?></p>
+                                    <p class="title-name"><?php the_title(); ?></p>
+                                </div>
+                            </a>
+                        </li>
+                    <?php endwhile; ?>
+                    <?php wp_reset_postdata(); ?>
+                <?php else : ?>
+                    <li style="list-style: none;">実績はまだありません。</li>
+                <?php endif; ?>
+            </ul>
+            <a href="<?php echo get_post_type_archive_link('works'); ?>" class="btn-common">and more</a>
+        </div>
         <div class="news-area l-container-100" id="news">
             <div class="l-container-width">
                 <h2>NEWS<span>新着情報</span></h2>
                 <ul>
-                    <li><a href="#">
-                            <img src="/assets/images/dammy.png">
-                            <p class="date">2025.00</p>
-                            <p class="title">HP開設しました。</p>
-                    </a></li>
-                    <li><a href="#">
-                            <img src="/assets/images/dammy.png">
-                            <p class="date">2025.00</p>
-                            <p class="title">HP開設しました。</p>
-                    </a></li>
-                    <li><a href="#">
-                            <img src="/assets/images/dammy.png">
-                            <p class="date">2025.00</p>
-                            <p class="title">HP開設しました。</p>
-                    </a></li>
+                    <?php
+                    // 最新の3件を取得x
+                    $args = array(
+                        'post_type'      => 'post',      
+                        'posts_per_page' => 3,           
+                    );
+                    $news_query = new WP_Query($args);
+                    ?>
+
+                    <?php if ($news_query->have_posts()) : ?>
+                        <?php while ($news_query->have_posts()) : $news_query->the_post(); ?>
+                            <li>
+                                <a href="<?php the_permalink(); ?>">
+                                    <?php if (has_post_thumbnail()) : ?>
+                                        <?php the_post_thumbnail('medium'); ?>
+                                    <?php else : ?>
+                                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/dammy.png" alt="ダミー画像">
+                                    <?php endif; ?>
+                                    
+                                    <p class="date"><?php echo get_the_date('Y.m.d'); ?></p>
+                                    <p class="title"><?php the_title(); ?></p>
+                                </a>
+                            </li>
+                        <?php endwhile; ?>
+                        <?php wp_reset_postdata(); ?>
+                    <?php else : ?>
+                        <li>お知らせはまだありません。</li>
+                    <?php endif; ?>
                 </ul>
-                <a href="" class="btn-common">past more</a>
+                <a href="<?php echo get_post_type_archive_link('post'); ?>/news" class="btn-common">past more</a>
             </div>
         </div>
+
 
         <div class="about-area l-container-width" id="aboutus">
             <h2>ABOUT US<span>会社概要</span></h2>
@@ -200,4 +167,6 @@
         <iframe src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d3242.1336113094935!2d139.74981217578625!3d35.64907962259769!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1z5p2x5Lqs6YO95riv5Yy66Iqd5Zub5LiB55uuNyDnlao2IOWPtyDoip3jg5Pjg6vjg4fjgqPjg7PjgrA3MDQ!5e0!3m2!1sja!2sjp!4v1771307134940!5m2!1sja!2sjp" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
     </div>
 
-<%- include('components/footer.ejs') %>
+
+
+<?php get_footer(); ?>

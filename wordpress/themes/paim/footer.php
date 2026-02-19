@@ -10,6 +10,8 @@
         </div>
     </footer>
     <small>© 2022 PAIM CO.,LTD ALL RIGHT RESERVED.</small>
-
+<?php wp_footer(); ?>
 </body>
 </html>
+
+
