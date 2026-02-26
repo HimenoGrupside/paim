@@ -95,9 +95,8 @@ add_filter('register_post_type_args', function($args, $post_type) {
  * Ajaxで実績（works）を読み込む
  */
 function load_more_works() {
-    // ボタンの data-page の値を受け取る（1回目は 1 が送られてくる）
+    $result="";
     $current_page = isset($_POST['page']) ? intval($_POST['page']) : 1;
-
     $args = array(
         'post_type'      => 'works',
         'posts_per_page' => 7,      // 追加する数
@@ -107,30 +106,41 @@ function load_more_works() {
         'order'          => 'DESC',
     );
 
+    $next_flag = $query->max_num_pages > $current_page + 1?1:0;
+
     $query = new WP_Query($args);
 
     if ($query->have_posts()) :
         while ($query->have_posts()) : $query->the_post(); 
+            $count ++;
             $company = get_post_meta(get_the_ID(), '_works_company', true);
-            ?>
-            <li>
-                <a href="<?php the_permalink(); ?>">
-                    <?php if (has_post_thumbnail()) : ?>
-                        <?php the_post_thumbnail('large'); ?>
-                    <?php else : ?>
-                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/dammy-g.png" alt="ダミー画像">
-                    <?php endif; ?>
-                    <div>
-                        <p class="company-name"><?php echo esc_html($company); ?></p>
-                        <p class="title-name"><?php the_title(); ?></p>
-                    </div>
-                </a>
-            </li>
-        <?php endwhile;
-    endif;
+            $permalink = get_the_permalink();
+            $thumbnail = has_post_thumbnail() 
+                ? get_the_post_thumbnail(get_the_ID(), 'large') 
+                : '<img src="' . get_template_directory_uri() . '/assets/images/dammy-g.png" alt="ダミー画像">';
+            $company_name = esc_html($company);
+            $post_title = get_the_title();
+            $result.=<<<HTML
+                <li>
+                    <a href="{$permalink}">
+                        {$thumbnail}
+                        <div>
+                            <p class="company-name">{$company_name}</p>
+                            <p class="title-name">{$post_title}</p>
+                        </div>
+                    </a>
+                </li>
+                HTML;
+        endwhile;
+    endif;    
 
     wp_reset_postdata();
+    wp_send_json([
+        'next' => $next_flag,
+        'result' => $result,
+    ]);    
     wp_die();
 }
 add_action('wp_ajax_load_more_works', 'load_more_works');
 add_action('wp_ajax_nopriv_load_more_works', 'load_more_works');
+

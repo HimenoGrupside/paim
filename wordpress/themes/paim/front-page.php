@@ -1,8 +1,8 @@
 <?php get_header(); ?>
 
     <div class="fv">
-        <h1><img src="/images/logo.svg" alt="PAIM"></h1>
-        <img class="arrow" src="/images/arrow.svg" alt="arrow">
+        <h1><img src="<?= get_template_directory_uri() ?>images/logo.svg" alt="PAIM"></h1>
+        <img class="arrow" src="<?= get_template_directory_uri() ?>images/arrow.svg" alt="arrow">
     </div>
 
     <div class="top-content-area">

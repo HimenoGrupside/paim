@@ -47,18 +47,24 @@ document.addEventListener('click', async (e) => {
       body: formData,
     });
 
-    const data = await response.text();
+    const data = await response.json();
+    const results = data.result ;
+    const next = data.next;
     console.log("サーバーからの返事:", data);
 
-    if (data && data.trim() !== "" && data !== "0") {
-      worksList.insertAdjacentHTML('beforeend', data);
+    if (results) {
+      worksList.insertAdjacentHTML('beforeend', results);
       btn.dataset.page = (page + 1).toString();
       btn.innerText = 'and more';
       btn.disabled = false;
     } else {
       console.log("データがないため終了します");
-      btn.style.display = 'none';
     }
+    if (next == 0){
+        btn.style.display = 'none';
+    }
+          
+
   } catch (error) {
     console.error('Fetch Error:', error);
     btn.innerText = 'Error!';
