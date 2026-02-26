@@ -88,31 +88,96 @@ h2 span::before {
     }
 }
 
-
 /* ======================================
-   header
+    header
 ====================================== */
-header{
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    max-width: 1920px;
-    padding: 40px 0;
+header {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  max-width: 1920px;
+  padding: 40px 0;
+  position: relative; /* ボタンの基準用 */
+  z-index: 100;
 }
 
-header a{
-    display: block;
-    max-width: 260px;  
-}
-header a img{
-    width: 100%;
-    display: block;
-}
-header ul{
-    display: flex;
-    gap: 35px;
+header .header-logo {
+  display: block;
+  max-width: 260px;
 }
 
+header ul {
+  display: flex;
+  gap: 35px;
+}
+
+/* --- ハンバーガーボタンの基本スタイル（PCでは隠す） --- */
+.hamburger {
+  display: none;
+  width: 40px;
+  height: 40px;
+  position: relative;
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 200;
+}
+
+@media (max-width: 768px) {
+   header{
+        width: 90%;
+        margin: 0 auto;
+        justify-content: space-between;
+        padding: 15px 0;
+   } 
+  .hamburger {
+    display: block; /* SPで表示 */
+  }
+
+  /* 3本線のデザイン */
+  .hamburger span {
+    display: block;
+    width: 30px;
+    height: 2px;
+    background-color: #333;
+    position: absolute;
+    left: 5px;
+    transition: 0.3s;
+  }
+  .hamburger span:nth-child(1) { top: 12px; }
+  .hamburger span:nth-child(2) { top: 20px; }
+  .hamburger span:nth-child(3) { top: 28px; }
+
+  /* ✖マークに変形 */
+  .hamburger.is-active span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+  .hamburger.is-active span:nth-child(2) { opacity: 0; }
+  .hamburger.is-active span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+  /* 右からスッと出るメニュー本体 */
+  .header-nav {
+    position: fixed;
+    top: 0;
+    right: -100%; /* 最初は画面の右に隠す */
+    width: 80%;    /* メニューの幅 */
+    height: 100vh;
+    background-color: #fff;
+    padding: 100px 40px;
+    transition: 0.4s; /* スッの速度 */
+    z-index: 150;
+    box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+  }
+
+  /* クラスがついたら右から出てくる */
+  .header-nav.is-active {
+    right: 0;
+  }
+
+  header ul {
+    flex-direction: column; /* 縦並び */
+    gap: 30px;
+    font-size: 1.2rem;
+  }
+}
 /* ======================================
    .fv
 ====================================== */
@@ -215,9 +280,12 @@ header ul{
     margin: 40px auto;
 }
 .works-area ul li{
-    width: calc(100% / 2 - 20px)
+    width: calc(100% / 2 - 20px);
+    position: relative;
 }
-
+.works-area ul li a{
+    opacity: 1;
+}
 /* 7つ周期の5番目 (5, 12, 19...) */
 .works-area ul li:nth-child(7n+5) { 
     width: calc( 100% / 3 - 20px);
@@ -258,6 +326,20 @@ header ul{
     object-fit: cover;
     object-position: center;
 }
+.works-area ul li div{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 10px;
+    background-color: #fff;
+    box-sizing: border-box;
+}
+.works-area ul li:hover div{
+    background-color: #333333;
+    color: #fff;
+}
+
 
 @media screen and (max-width: 768px) {
   .works-area ul {

@@ -1,8 +1,8 @@
 <?php get_header(); ?>
 
     <div class="fv">
-        <h1><img src="/assets/images/logo.svg" alt="PAIM"></h1>
-        <img class="arrow" src="/assets/images/arrow.svg" alt="arrow">
+        <h1><img src="/images/logo.svg" alt="PAIM"></h1>
+        <img class="arrow" src="/images/arrow.svg" alt="arrow">
     </div>
 
     <div class="top-content-area">
@@ -21,12 +21,12 @@
     <div class="wrapper">
         <div class="works-area l-container-width" id="works">
             <h2>WORKS<span>実績紹介</span></h2>
-            <ul>
+            <ul id="works-list">
                 <?php
-                // 実績（works）を最新の12件取得する設定
                 $args = array(
-                    'post_type'      => 'works', // カスタム投稿タイプ名
-                    'posts_per_page' => 12,      // 表示したい件数
+                    'post_type'      => 'works',
+                    'posts_per_page' => 7, // 最初に出す数
+                    'paged'          => 1,
                 );
                 $works_query = new WP_Query($args);
                 ?>
@@ -42,19 +42,21 @@
                                 <?php endif; ?>
                                 
                                 <div>
-                                    <p class="company-name"><?php echo get_the_excerpt(); ?></p>
+                                    <p class="company-name"><?php echo get_post_meta(get_the_ID(), '_works_company', true); ?></p>
                                     <p class="title-name"><?php the_title(); ?></p>
                                 </div>
                             </a>
-                        </li>
-                    <?php endwhile; ?>
+                        </li>                   
+                     <?php endwhile; ?>
                     <?php wp_reset_postdata(); ?>
-                <?php else : ?>
-                    <li style="list-style: none;">実績はまだありません。</li>
                 <?php endif; ?>
             </ul>
-            <a href="<?php echo get_post_type_archive_link('works'); ?>" class="btn-common">and more</a>
-        </div>
+            
+            <div class="btn-center">
+                <button id="load-more-works" class="btn-common" data-page="1">and more</button>
+            </div>
+        </div>       
+
         <div class="news-area l-container-100" id="news">
             <div class="l-container-width">
                 <h2>NEWS<span>新着情報</span></h2>
@@ -88,7 +90,7 @@
                         <li>お知らせはまだありません。</li>
                     <?php endif; ?>
                 </ul>
-                <a href="<?php echo get_post_type_archive_link('post'); ?>/news" class="btn-common">past more</a>
+                <a href="<?php echo esc_url(home_url('/news/')); ?>" class="btn-common">past more</a>
             </div>
         </div>
 

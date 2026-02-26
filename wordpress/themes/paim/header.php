@@ -22,11 +22,20 @@
 </head>
   <body>
   <header>
-      <a href="#"><img src="/assets/images/logo.svg" alt="PAIM"></a>
+    <a href="#" class="header-logo"><img src="/assets/images/logo.svg" alt="PAIM"></a>
+
+    <button class="hamburger" id="js-hamburger" aria-label="メニュー開閉">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <nav class="header-nav" id="js-nav">
       <ul>
-          <li><a href="#works">WORKS</a></li>
-          <li><a href="#news">NEWS</a></li>
-          <li><a href="#aboutus">ABOUT US</a></li>
-          <li><a href="#contact">CONTACT</a></li>
+        <li><a href="#works">WORKS</a></li>
+        <li><a href="#news">NEWS</a></li>
+        <li><a href="#aboutus">ABOUT US</a></li>
+        <li><a href="#contact">CONTACT</a></li>
       </ul>
+    </nav>
   </header>

@@ -9,7 +9,7 @@
             <img src="/assets/images/logo.svg" alt="PAIM">
         </div>
     </footer>
-    <small>© 2022 PAIM CO.,LTD ALL RIGHT RESERVED.</small>
+    <small>© PAIM CO.,LTD ALL RIGHT RESERVED.</small>
 <?php wp_footer(); ?>
 </body>
 </html>

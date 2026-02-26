@@ -1,7 +1,7 @@
 <?php get_header(); ?>
 
 <main style="padding: 100px 20px;">
-    <h1>NEWS 一覧（テスト表示）</h1>
+    <h1>NEWS 一覧</h1>
 
     <?php if (have_posts()) : ?>
         <ul>
