@@ -5,5 +5,6 @@
     "WP_UPLOAD_MAX_FILESIZE": "128M",
     "WP_MEMORY_LIMIT": "256M"
   },
-  "themes": [ "./wordpress/themes/paim" ]
+  "themes": [ "./wordpress/themes/paim" ],
+  "plugins": [ "./wordpress/plugins/snow-monkey-forms" ] 
 }

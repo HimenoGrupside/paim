@@ -22,7 +22,7 @@
 </head>
   <body>
   <header>
-    <a href="#" class="header-logo"><img src="/assets/images/logo.svg" alt="PAIM"></a>
+    <a href="<?= esc_url(home_url('/')); ?>" class="header-logo"><img src="<?= get_template_directory_uri() ?>/images/logo.svg" alt="PAIM"></a>
 
     <button class="hamburger" id="js-hamburger" aria-label="メニュー開閉">
       <span></span>

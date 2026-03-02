@@ -11,6 +11,7 @@
   }
 }
 
+.sp{display: none;}
 
 a:hover{
     opacity: 0.6;
@@ -86,6 +87,8 @@ h2 span::before {
         max-width: 90%;
         margin: 0 auto;
     }
+
+    .sp{display: block;}
 }
 
 /* ======================================
@@ -104,7 +107,15 @@ header {
 header .header-logo {
   display: block;
   max-width: 260px;
+  position: relative; 
+  z-index: 200;      
 }
+header .header-logo img{
+    max-width: 260px;  
+    display: block;
+    height: 40px;
+}
+
 
 header ul {
   display: flex;
@@ -131,7 +142,7 @@ header ul {
         padding: 15px 0;
    } 
   .hamburger {
-    display: block; /* SPで表示 */
+    display: block; 
   }
 
   /* 3本線のデザイン */
@@ -139,7 +150,7 @@ header ul {
     display: block;
     width: 30px;
     height: 2px;
-    background-color: #333;
+    background-color: #aad0df;
     position: absolute;
     left: 5px;
     transition: 0.3s;
@@ -148,35 +159,53 @@ header ul {
   .hamburger span:nth-child(2) { top: 20px; }
   .hamburger span:nth-child(3) { top: 28px; }
 
-  /* ✖マークに変形 */
   .hamburger.is-active span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
   .hamburger.is-active span:nth-child(2) { opacity: 0; }
   .hamburger.is-active span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
 
-  /* 右からスッと出るメニュー本体 */
-  .header-nav {
+.header-nav {
     position: fixed;
     top: 0;
-    right: -100%; /* 最初は画面の右に隠す */
-    width: 80%;    /* メニューの幅 */
+    right: -100%; 
+    width: 100%;   
     height: 100vh;
-    background-color: #fff;
+    background-color: rgba(255, 255, 255, 0.5); 
+    backdrop-filter: blur(5px); 
     padding: 100px 40px;
-    transition: 0.4s; /* スッの速度 */
-    z-index: 150;
-    box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+    transition: 0.4s; 
+    z-index: 150;             
+    box-shadow: none;       
   }
 
-  /* クラスがついたら右から出てくる */
+  /* 縦中央に寄せたい場合は以下を追加 */
   .header-nav.is-active {
     right: 0;
   }
 
-  header ul {
-    flex-direction: column; /* 縦並び */
-    gap: 30px;
-    font-size: 1.2rem;
-  }
+    header ul {
+        height: 100%;
+        margin-top: 50px;
+        flex-direction: column; 
+        gap: 30px;
+        font-size: 1.2rem;
+    }
+    .header-nav ul li a{
+        position: relative;
+        width: 100%;
+        padding: 0 20px;
+        box-sizing: border-box;
+        display: block;
+    }
+    .header-nav ul li a::before{
+        content: "";
+        position: absolute;
+        bottom: 8px;
+        left: 0;
+        width: 100%;
+        height: 5px;
+        background-color: #689acb;
+        z-index: -1;
+    }
 }
 /* ======================================
    .fv
@@ -204,7 +233,13 @@ header ul {
     width: 45px;
     margin: 0 auto;
 }
+@media screen and (max-width: 768px) {
 
+    .fv h1 img{
+        width: 80%;
+        margin: 0 auto;
+    }
+}   
 /* ======================================
     .top-content-area
 ====================================== */
@@ -267,7 +302,30 @@ header ul {
     font-weight: normal;
     width: 100%;
 }
+@media screen and (max-width: 768px) {
 
+    .top-content-message{
+        width: 90%;
+        margin: 0 auto;
+        font-size: 20px;
+        line-height: 2rem;
+    }
+
+    .top-content-area .box p{
+        font-size: 18px;
+        width: 90%;
+        margin: 0 auto;
+    }
+
+    .top-content-area .box ul li{
+        width: 160px;
+        font-size: 16px;
+        height: 160px;
+    }
+    .top-content-area .box ul li span{
+        font-size: 12px;
+    }
+}
 /* ======================================
     works-area
 ====================================== */
@@ -340,7 +398,6 @@ header ul {
     color: #fff;
 }
 
-
 @media screen and (max-width: 768px) {
   .works-area ul {
     display: flex;
@@ -384,13 +441,41 @@ header ul {
     font-weight: bold;
 }
 
+@media screen and (max-width: 1024px) {
+  .news-area ul li{
+    width: calc(100% / 3 - 20px);
+  }
+}
+
 @media screen and (max-width: 768px) {
     .news-area ul{
         flex-wrap: wrap;
     }
     .news-area ul li{
         width: 100%;
+        background: transparent;
     }
+
+    .news-area ul li a {
+        display: flex;
+        align-items: normal; /* 上揃え（中央なら center） */
+        gap: 15px;               /* 画像と文字の間の隙間 */
+        text-decoration: none;
+        margin-bottom: 20px;     /* リスト同士の間隔 */
+    }
+
+     .news-area ul li a img{
+        width: 100%;
+     }
+
+
+    .news-area .news-text-content{
+        background-color: #fff;
+        width: 100%;
+    }
+
+
+
 }
 
 /* ======================================
@@ -509,4 +594,229 @@ small{
     padding: 10px 60px;
 }
 
+@media screen and (max-width: 768px) {
+    footer{
+        padding: 30px 30px 0;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 50px;
+    }
+    footer ul{
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;   
+        gap: 10px;
+        align-items: center;
+        justify-content: space-between;
+     }
+     footer ul li{
+        width: 45%;
+        font-size: 26px;
+     }
+     small{
+        justify-content: center;
+        padding-top: 30px;
+     }
+}
 
+
+/* ======================================
+    ぱんくず
+====================================== */
+.p-breadcrumbs {
+    font-size: 12px;
+    max-width: 1255px;
+    margin: 0 auto;
+    width: 90%;
+    padding: 20px 0; 
+}
+
+.p-breadcrumbs ul {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.p-breadcrumbs li {
+    display: flex;
+    align-items: center;
+    line-height: 180%;
+}
+
+.p-breadcrumbs li:not(:last-child)::after {
+    content: ">";
+    margin-left: 10px;  
+    margin-right: 10px;  
+    margin-bottom: 2px;
+    color: #ccc;      
+
+}
+
+.p-breadcrumbs a {
+    text-decoration: none;
+    color: #333;
+}
+
+.p-breadcrumbs a:hover {
+    text-decoration: underline;
+}
+
+.p-breadcrumbs li:last-child {
+    color: #00a5e5;
+    font-weight: bold; 
+    pointer-events: none; 
+}
+/* ======================================
+    news一覧ページ
+====================================== */
+.page-news{
+    max-width: 1200px;
+    margin: 80px auto;
+}
+
+.page-news h1 {
+  margin: 0px 0 80px;
+  font-size: 32px;
+  font-weight: bold;
+  display: inline-block; 
+  padding: 0 20px; 
+  text-align: center;
+}
+
+.page-news h1 span {
+  font-size: 16px;
+  display: block;
+  text-align: center;
+  position: relative;
+  margin-left: -20px; 
+  margin-right: -20px;  
+  padding-top: 10px;
+  font-weight: normal;
+}
+
+.page-news h1 span::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%; 
+  height: 5px;
+  background-color: #00a5e5;
+  border-radius: 5px;
+}
+
+.page-news ul li a{
+    border-bottom: 1px solid #00a5e5;
+    padding: 10px;
+    display: flex;
+    gap:20px;
+}
+
+.page-news ul li .date{}
+.page-news ul li .title{
+    font-weight: bold;
+}
+
+@media screen and (max-width: 768px) {
+    .page-news{
+        width: 90%;
+    }
+}
+/* ======================================
+    news詳細ページ
+====================================== */
+.page-detail h1{
+    font-size: 24px;
+    border-bottom: 1px solid #00a5e5;
+    padding: 10px;
+}
+.page-detail .date{
+    padding: 10px;
+    text-align: right;
+    font-size: 12px;
+}
+.page-detail .backbtn{
+    text-align: center;
+    margin: 80px auto 60px;
+}
+
+.page-detail .btn-common{
+    position: relative;
+}
+
+.post-content{
+    width: 90%;
+    margin: 0 auto;
+}
+
+/* ======================================
+    お問い合わせ
+====================================== */
+.snow-monkey-form{
+    border-top:2px solid #00a5e5;
+    padding: 10px 0;
+}
+
+.smf-item {
+    display: flex;
+    flex-wrap: wrap; 
+    margin-bottom: 20px; 
+    align-items: flex-start;
+    gap: 20px;
+    font-size: 14px;
+    border-bottom: 1px solid #fff;
+    padding-bottom: 10px;
+}
+
+.smf-item__col--label {
+    flex: 0 0 200px;
+    max-width: 200px;
+    background-color: #fff;
+    text-align: center;
+    padding: 10px;
+}
+
+.smf-item input{
+    width: 100%;
+}
+.smf-item__col--controls {
+    flex: 1; 
+}
+
+.smf-button-control__control{
+    border-radius: 50%!important;
+    border: 3px solid #00a5e5!important;
+    background-color: #fff!important;
+    width: 100px!important;
+    height: 100px!important;
+    display: flex!important;
+    justify-content: center!important;
+    align-items: center!important;
+    position: absolute!important;
+    left: 0!important;
+    margin: 0 auto!important;
+    right: 0!important;
+    font-size: 14px!important;
+    z-index: 1!important;
+    letter-spacing: 0.1px!important;
+}
+
+@media screen and (max-width: 767px) {
+    .smf-item {
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+        gap:0px;
+    }
+    .smf-item__col--label {
+        flex: 0 0 auto;
+        max-width: 100%;
+        margin-bottom: 8px; 
+        min-width: 200px;
+    }
+    .smf-item__col--controls{
+        width: 100%;
+    }
+
+}

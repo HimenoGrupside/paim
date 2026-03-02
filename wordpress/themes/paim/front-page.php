@@ -1,12 +1,11 @@
 <?php get_header(); ?>
-
     <div class="fv">
-        <h1><img src="<?= get_template_directory_uri() ?>images/logo.svg" alt="PAIM"></h1>
-        <img class="arrow" src="<?= get_template_directory_uri() ?>images/arrow.svg" alt="arrow">
+        <h1><img src="<?= get_template_directory_uri() ?>/images/logo.svg" alt="PAIM"></h1>
+        <img class="arrow" src="<?= get_template_directory_uri() ?>/images/arrow.svg" alt="arrow">
     </div>
 
     <div class="top-content-area">
-        <p class="top-content-message">PAIM は、広告制作・イベント企画・映像・PR を横断し、<br>企業のコミュニケーションを支援するプロモーションカンパニーです。</p>
+        <p class="top-content-message">PAIM は、広告制作・<br class="sp">イベント企画・映像・PR を横断し、<br>企業のコミュニケーションを支援するプロモーションカンパニーです。</p>
         <div class="box">
             <ul>
                 <li><span>CREATIVE<br>DIRECTION</span>クリエイティブ<br>制作</li>
@@ -14,7 +13,7 @@
                 <li><span>MOVIE<br>PROMOTION</span>CM・PR 制作</li>
                 <li><span>PROJECT<br>BRANDING</span>企業・事業<br>ブランディング</li>
             </ul>
-            <p>企画立案からビジュアル開発、現場運営までをワンストップで提供し、<br>ブランドの持つ価値を正しく伝えるためのクリエイティブを設計します。</p>
+            <p>企画立案からビジュアル開発、<br class="sp">現場運営までをワンストップで提供し、<br>ブランドの持つ価値を正しく伝えるための<br class="sp">クリエイティブを設計します。</p>
         </div>
     </div>
 
@@ -38,7 +37,7 @@
                                 <?php if (has_post_thumbnail()) : ?>
                                     <?php the_post_thumbnail('large'); ?>
                                 <?php else : ?>
-                                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/dammy-g.png" alt="ダミー画像">
+                                    <img src="<?php echo get_template_directory_uri(); ?>/images/dammy-g.png" alt="ダミー画像">
                                 <?php endif; ?>
                                 
                                 <div>
@@ -72,19 +71,21 @@
 
                     <?php if ($news_query->have_posts()) : ?>
                         <?php while ($news_query->have_posts()) : $news_query->the_post(); ?>
-                            <li>
-                                <a href="<?php the_permalink(); ?>">
-                                    <?php if (has_post_thumbnail()) : ?>
-                                        <?php the_post_thumbnail('medium'); ?>
-                                    <?php else : ?>
-                                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/dammy.png" alt="ダミー画像">
-                                    <?php endif; ?>
-                                    
+                        <li>
+                            <a href="<?php the_permalink(); ?>">
+                                <?php if (has_post_thumbnail()) : ?>
+                                    <?php the_post_thumbnail('medium'); ?>
+                                <?php else : ?>
+                                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/dammy.png" alt="ダミー画像">
+                                <?php endif; ?>
+                                
+                                <div class="news-text-content">
                                     <p class="date"><?php echo get_the_date('Y.m.d'); ?></p>
                                     <p class="title"><?php the_title(); ?></p>
-                                </a>
-                            </li>
-                        <?php endwhile; ?>
+                                </div>
+                            </a>
+                        </li>                       
+                         <?php endwhile; ?>
                         <?php wp_reset_postdata(); ?>
                     <?php else : ?>
                         <li>お知らせはまだありません。</li>
@@ -154,13 +155,8 @@
             <div class="l-container-width">
                 <h2>CONTACT<span>お問い合わせ</span></h2>
                 <p>当社へのお問い合わせやご相談につきましては、下記メールフォームにて承っております。お気軽にどうぞ。</p>
-                <ul>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                </ul>
+                <?php echo apply_filters('the_content', '<!-- wp:snow-monkey-forms/snow-monkey-form {"formId":28} /-->'); ?>
             </div>
-            <a href="" class="btn-common">確認</a>
         </div>
 
     </div><!-- .wrapper -->

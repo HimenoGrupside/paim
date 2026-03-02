@@ -6,7 +6,7 @@
             <li><a href="#contact">CONTACT</a></li>
         </ul>
         <div>
-            <img src="/assets/images/logo.svg" alt="PAIM">
+            <img src="<?= get_template_directory_uri() ?>/images/logo.svg" alt="PAIM">
         </div>
     </footer>
     <small>© PAIM CO.,LTD ALL RIGHT RESERVED.</small>
