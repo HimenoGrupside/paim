@@ -26,27 +26,43 @@
                     'post_type'      => 'works',
                     'posts_per_page' => 7, // 最初に出す数
                     'paged'          => 1,
+                    'post_status'    => 'publish',
                 );
                 $works_query = new WP_Query($args);
                 ?>
 
                 <?php if ($works_query->have_posts()) : ?>
                     <?php while ($works_query->have_posts()) : $works_query->the_post(); ?>
+                        <?php
+                        // 各種データの取得
+                        $company = get_post_meta(get_the_ID(), '_works_company', true);
+                        $no_link = get_post_meta(get_the_ID(), '_no_link_flag', true); // リンクなしフラグ
+                        ?>
                         <li>
-                            <a href="<?php the_permalink(); ?>">
+                            <?php if ($no_link === '1') : ?>
+                                <div class="works-item -no-link">
+                            <?php else : ?>
+                                <a href="<?php the_permalink(); ?>">
+                            <?php endif; ?>
+
                                 <?php if (has_post_thumbnail()) : ?>
                                     <?php the_post_thumbnail('large'); ?>
                                 <?php else : ?>
                                     <img src="<?php echo get_template_directory_uri(); ?>/images/dammy-g.png" alt="ダミー画像">
                                 <?php endif; ?>
                                 
-                                <div>
-                                    <p class="company-name"><?php echo get_post_meta(get_the_ID(), '_works_company', true); ?></p>
+                                <div class="works-item-name">
+                                    <p class="company-name"><?php echo esc_html($company); ?></p>
                                     <p class="title-name"><?php the_title(); ?></p>
                                 </div>
-                            </a>
+
+                            <?php if ($no_link === '1') : ?>
+                                </div>
+                            <?php else : ?>
+                                </a>
+                            <?php endif; ?>
                         </li>                   
-                     <?php endwhile; ?>
+                    <?php endwhile; ?>
                     <?php wp_reset_postdata(); ?>
                 <?php endif; ?>
             </ul>
@@ -54,7 +70,7 @@
             <div class="btn-center">
                 <button id="load-more-works" class="btn-common" data-page="1">and more</button>
             </div>
-        </div>       
+        </div>
 
         <div class="news-area l-container-100" id="news">
             <div class="l-container-width">

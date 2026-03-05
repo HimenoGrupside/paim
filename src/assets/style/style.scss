@@ -17,7 +17,12 @@ a:hover{
     opacity: 0.6;
     transition: 0.3s;
 }
-
+.post-img img, .post-content img{
+    display: block;
+    width: 100%;
+    margin: 20px auto;
+    max-width: 800px!important;
+}
 p{
     font-size: 15px;
 }
@@ -347,8 +352,15 @@ header ul {
 /* 7つ周期の5番目 (5, 12, 19...) */
 .works-area ul li:nth-child(7n+5) { 
     width: calc( 100% / 3 - 20px);
-
 }
+/* 7つ周期の5番目 (5, 12, 19...) */
+.works-area ul li:nth-child(7n+5) img{ 
+    min-height: 450px;
+    
+}
+
+
+
 
 /* 7つ周期の6番目 (6, 13, 20...) */
 .works-area ul li:nth-child(7n+6) { 
@@ -384,7 +396,7 @@ header ul {
     object-fit: cover;
     object-position: center;
 }
-.works-area ul li div{
+.works-area ul li .works-item-name{
     position: absolute;
     bottom: 0;
     left: 0;
